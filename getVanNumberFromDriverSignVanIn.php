@@ -12,7 +12,7 @@ FROM
         INNER JOIN
     staff ON dutydetails.staffMember = staff.payeNumber
 WHERE
-    staffMember = 5";
+    staffMember = $staffMember";
 
 $result = $conn->query($sql);
 	if($result -> num_rows > 0) {
