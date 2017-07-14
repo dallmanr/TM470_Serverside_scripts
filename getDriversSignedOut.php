@@ -1,8 +1,12 @@
 <?php
 
   include "database.php";
-  $sql = "SELECT firstName, lastName, payeNumber from projectdb1.dutyDetails INNER JOIN vans ON dutydetails.vanNumber = vans.vehicleNumber
-  INNER JOIN staff ON dutydetails.staffMember = staff.payeNumber WHERE DATE(timeIn) IS NULL ORDER BY payeNumber ASC";
+  $sql = "SELECT firstName, lastName, payeNumber
+  from projectdb1.dutyDetails
+  INNER JOIN vans ON dutydetails.vanNumber = vans.vehicleNumber
+  INNER JOIN staff ON dutydetails.staffMember = staff.payeNumber
+  WHERE DATE(timeIn) IS NULL AND DATE(timeOut) = CURDATE()
+  ORDER BY payeNumber ASC";
 
   $result = $conn->query($sql);
       if($result -> num_rows > 0) {

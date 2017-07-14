@@ -4,7 +4,7 @@
   $staffMember = intval($_POST['staffMember']);
 
 $sql = "SELECT
-    vanNumber
+    vanNumber, pdaOne, pdaTwo, duty
 FROM
     dutyDetails
         INNER JOIN
@@ -12,15 +12,21 @@ FROM
         INNER JOIN
     staff ON dutydetails.staffMember = staff.payeNumber
 WHERE
-    staffMember = $staffMember";
+    staffMember = 2
+        AND DATE(timeOut) = CURDATE()
+        AND DATE(timeIn) IS NULL";
 
 $result = $conn->query($sql);
+
 	if($result -> num_rows > 0) {
   while ($row = $result-> fetch_assoc()) {
     $data[] = $row;
-      }
-    $myJSON = json_encode($data);
-    echo $myJSON;
+    }
+  } else {
+    $error = $conn->error;
+    $data[] = $error;
     //echo "<script language='javascript'>alert('$myJSON');</script>";
   }
+  $myJSON = json_encode($data);
+  echo $myJSON;
 ?>
