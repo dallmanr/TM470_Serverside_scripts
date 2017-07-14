@@ -12,7 +12,7 @@ FROM
         INNER JOIN
     staff ON dutydetails.staffMember = staff.payeNumber
 WHERE
-    staffMember = 2
+    staffMember = $staffMember
         AND DATE(timeOut) = CURDATE()
         AND DATE(timeIn) IS NULL";
 
