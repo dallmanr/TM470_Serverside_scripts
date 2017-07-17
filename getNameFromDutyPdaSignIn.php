@@ -1,24 +1,34 @@
 <?php
   include 'database.php';
 
-  $dutyNumber = intval($_POST['dutyNumber']);
+  $dutyNumber = $_POST["dutyNumber"];
 
 $sql = "SELECT
-    firstName, lastName, payeNumber
+    firstName, lastName, payeNumber, duty, pdaOne
 FROM
-    staff
+    dutyDetails
         INNER JOIN
-    dutyDetails ON dutyDetails.staffMember = staff.payeNumber
+    staff ON dutyDetails.staffMember = staff.payeNumber
 WHERE
-    duty = $dutyNumber AND DATE(timeIn) IS NULL;";
+    duty = '$dutyNumber' AND DATE(timeIn) IS NULL
+        AND DATE(timeOut) = CURDATE();";
 
-$result = $conn->query($sql);
-	if($result -> num_rows > 0) {
-  while ($row = $result-> fetch_assoc()) {
-    $data[] = $row;
-      }
-    $myJSON = json_encode($data);
-    echo $myJSON;
-    //echo "<script language='javascript'>alert('$myJSON');</script>";
-  }
-?>
+        $result = $conn->query($sql);
+
+        $data = ["status" => "",
+      "data" => ""];
+        if($result -> num_rows > 0) {
+          $data["status"] = "success";
+          while ($row = $result->fetch_assoc()) {
+            $data["data"] = $row;
+          }
+            //header("location: index.html");
+        } else {
+          $error = $conn->error;
+          $data[]= $error;
+            //echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+          $myJSON = json_encode($data);
+          echo $myJSON;
+        //$conn->close();
+        ?>

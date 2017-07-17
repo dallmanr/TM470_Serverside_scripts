@@ -1,24 +1,21 @@
 <?php
   include "database.php";
 
-  $name = $_POST['name'];
-  $duty = $_POST['duty'];
-  $vehicleNumber = $_POST['vehicleNumber'];
-  $logbook = intval($_POST['logbook']);
-  $pdaOne = intval($_POST['pdaOne']);
-  $pdaTwo = intval($_POST['pdaTwo']);
-  $pegs = intval($_POST['pegs']);
-  $footwear = intval($_POST['footwear']);
-  $jacket = intval($_POST['jacket']);
+  $name = intval($_POST["name"]);
+  $duty = $_POST["duty"];
+  $pdaOne = intval($_POST["pdaOne"]);
+  $pegs = intval($_POST["pegs"]);
+  $footwear = intval($_POST["footwear"]);
+  $jacket = intval($_POST["jacket"]);
 
   $curDate = date('y/m/d');
 
 
 $sql = "INSERT INTO
 dutydetails
-  (staffMember, duty, pdaOne, pdaTwo, vanNumber, hiVis, footwear, postingPeg)
+  (staffMember, duty, pdaOne, hiVis, footwear, postingPeg)
 VALUES
-  ($name, '$duty', $pdaOne, $pdaTwo, '$vehicleNumber', $jacket, $footwear, $pegs);";
+  ($name, '$duty', $pdaOne, $jacket, $footwear, $pegs);";
 
         $data = ["status" => ""];
 
