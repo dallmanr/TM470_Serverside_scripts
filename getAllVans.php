@@ -6,15 +6,20 @@ $sql = "SELECT * FROM vans";
 
 $result = $conn->query($sql);
 
-
+$data = array();
 if($result -> num_rows > 0) {
+  //$data["status"] = "success";
+  array_push($data, "success");
+  array_push($data, "data");
   while ($row = $result->fetch_assoc()) {
-    $data[] = $row;
+    $value = $row;
+    array_push($data, $value);
   }
     //header("location: index.html");
 } else {
   $error = $conn->error;
-  $data[]= $error;
+  $data["status"] = "error";
+  $data["data"] = $error;
     //echo "Error: " . $sql . "<br>" . $conn->error;
 }
   $myJSON = json_encode($data);

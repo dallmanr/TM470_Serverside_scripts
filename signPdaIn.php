@@ -1,15 +1,15 @@
 <?php
   include "database.php";
 
-  $staffMember = intval($_POST['staffMember']);
-  $pdaReturned = intval($_POST['pdaReturned']);
-  $duty = $_POST['duty'];
+  $staffMember = intval($_POST["staffMember"]);
+  $pdaReturned = intval($_POST["pdaReturned"]);
+  $duty = $_POST["duty"];
 
 $sql = "UPDATE dutyDetails
 SET
     pdasReturned = $pdaReturned
 WHERE
-    staffMember = $staffMember AND duty = '$duty'
+    staffMember = $staffMember AND duty = "$duty"
         AND DATE(timeOut) = CURDATE()
         AND timeIn IS NULL;";
 
