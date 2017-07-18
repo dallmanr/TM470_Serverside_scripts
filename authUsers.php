@@ -10,12 +10,14 @@ FROM
         INNER JOIN
     staff ON admins.staffId = staff.payeNumber
   WHERE password = $pw";
+
   $data = ["status" => "",
           "data" => ""];
+
   $result = $conn->query($sql);
   	if($result -> num_rows > 0) {
-    while ($row = $result-> fetch_assoc()) {
       $data["status"] = "success";
+    while ($row = $result-> fetch_assoc()) {
       $data["data"] = $row;
       }
     } else {
