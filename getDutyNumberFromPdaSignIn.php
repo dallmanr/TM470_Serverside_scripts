@@ -6,7 +6,8 @@ $sql = "SELECT
 FROM
     dutyDetails
 WHERE
-    DATE(timeIn) IS NULL";
+    DATE(timeIn) IS NULL
+        AND DATE(timeOut) = CURDATE();";
 
     $result = $conn->query($sql);
         if($result -> num_rows > 0) {

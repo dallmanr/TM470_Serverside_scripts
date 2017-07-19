@@ -9,7 +9,7 @@ $sql = "UPDATE dutyDetails
 SET
     pdasReturned = $pdaReturned
 WHERE
-    staffMember = $staffMember AND duty = "$duty"
+    staffMember = $staffMember AND duty = '$duty'
         AND DATE(timeOut) = CURDATE()
         AND timeIn IS NULL;";
 
