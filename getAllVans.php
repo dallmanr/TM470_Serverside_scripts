@@ -9,8 +9,8 @@ $result = $conn->query($sql);
 $data = array();
 if($result -> num_rows > 0) {
   //$data["status"] = "success";
-  array_push($data, "success");
-  array_push($data, "data");
+  //array_push($data, "success");
+  //array_push($data, "data");
   while ($row = $result->fetch_assoc()) {
     $value = $row;
     array_push($data, $value);
