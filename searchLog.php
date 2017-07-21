@@ -18,9 +18,9 @@ $sql = "SELECT
             ' ',
             '(',
             staffMember,
-            ')') as name,
+            ')') AS name,
     TIME(timeOut) as timeOut,
-    TIME(timeIn) as timeIn,
+    TIME(timeIn)as timeIn,
     hiVis,
     footwear,
     postingPeg,
@@ -43,7 +43,7 @@ $result = $conn->query($sql);
 $data = array();
 if($result -> num_rows > 0) {
   //$data["status"] = "success";
-  //array_push($data, "success");
+  array_push($data, "success");
   //array_push($data, "data");
   while ($row = $result->fetch_assoc()) {
     $value = $row;
@@ -51,7 +51,8 @@ if($result -> num_rows > 0) {
   }
 } else {
   $error = $conn->error;
-  array_push($data, $error);
+  $data["status"] = "error";
+  $data["data"] = $error;
 }
   $myJSON = json_encode($data);
   echo $myJSON;
