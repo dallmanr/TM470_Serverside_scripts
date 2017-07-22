@@ -10,7 +10,7 @@ $dateTo = $_POST['dateTo'];
 
 
 $sql = "SELECT
-    DATE(timeOut) as date,
+    DATE(timeOut) AS theDate,
     vanNumber,
     CONCAT(firstName,
             ' ',
@@ -19,8 +19,8 @@ $sql = "SELECT
             '(',
             staffMember,
             ')') AS name,
-    TIME(timeOut) as timeOut,
-    TIME(timeIn)as timeIn,
+    TIME(timeOut) AS timeOut,
+    TIME(timeIn) AS timeIn,
     hiVis,
     footwear,
     postingPeg,
@@ -43,7 +43,7 @@ $result = $conn->query($sql);
 $data = array();
 if($result -> num_rows > 0) {
   //$data["status"] = "success";
-  array_push($data, "success");
+  //array_push($data, "success");
   //array_push($data, "data");
   while ($row = $result->fetch_assoc()) {
     $value = $row;
