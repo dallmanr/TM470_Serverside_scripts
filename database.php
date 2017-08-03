@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "huehue84";
+$password = "####";
 $dbname = "projectdb1";
 
 //Create conn
