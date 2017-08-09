@@ -3,7 +3,7 @@
   include "database.php";
   $sql = "SELECT firstName, lastName, payeNumber
   from projectdb1.dutyDetails
-  INNER JOIN vans ON dutydetails.vanNumber = vans.vehicleNumber
+  INNER JOIN vans ON dutydetails.vanID = vans.vanID
   INNER JOIN staff ON dutydetails.staffMember = staff.payeNumber
   WHERE DATE(timeIn) IS NULL AND DATE(timeOut) = CURDATE()
   ORDER BY payeNumber ASC";

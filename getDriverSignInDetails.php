@@ -4,11 +4,11 @@
   $staffMember = intval($_POST['staffMember']);
 
 $sql = "SELECT
-    vanNumber, pdaOne, pdaTwo, duty
+    vehicleNumber, pdaOne, pdaTwo, duty
 FROM
     dutyDetails
         INNER JOIN
-    vans ON dutydetails.vanNumber = vans.vehicleNumber
+    vans ON dutydetails.vanID = vans.vanID
         INNER JOIN
     staff ON dutydetails.staffMember = staff.payeNumber
 WHERE

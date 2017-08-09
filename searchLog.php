@@ -11,7 +11,7 @@ $dateTo = $_POST['dateTo'];
 
 $sql = "SELECT
     DATE(timeOut) AS theDate,
-    vanNumber,
+    vehicleNumber,
     CONCAT(firstName,
             ' ',
             lastName,
@@ -28,7 +28,7 @@ $sql = "SELECT
 FROM
     dutydetails
         INNER JOIN
-    vans ON dutydetails.vanNumber = vans.vehicleNumber
+    vans ON dutydetails.vanID = vans.vanID
         INNER JOIN
     staff ON dutydetails.staffMember = staff.payeNumber
 WHERE
