@@ -1,5 +1,7 @@
 <?php
+session_start();
  include "database.php";
+
  //header('Content-Type: application/json');
  $pw = intval($_POST['pw']);
 

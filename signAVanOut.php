@@ -3,22 +3,22 @@
 
   $name = $_POST['name'];
   $duty = $_POST['duty'];
-  $vehicleNumber = $_POST['vehicleNumber'];
-  $logbook = intval($_POST['logbook']);
+  $vanID = intval($_POST['vanID']);
+  $logbook = $_POST['logbook'];
   $pdaOne = intval($_POST['pdaOne']);
   $pdaTwo = intval($_POST['pdaTwo']);
-  $pegs = intval($_POST['pegs']);
-  $footwear = intval($_POST['footwear']);
-  $jacket = intval($_POST['jacket']);
+  $pegs = $_POST['pegs'];
+  $footwear = $_POST['footwear'];
+  $jacket = $_POST['jacket'];
 
   $curDate = date('y/m/d');
 
 
 $sql = "INSERT INTO
 dutydetails
-  (staffMember, duty, pdaOne, pdaTwo, vanNumber, hiVis, footwear, postingPeg)
+  (staffMember, duty, pdaOne, pdaTwo, vanID, hiVis, footwear, postingPeg)
 VALUES
-  ($name, '$duty', $pdaOne, $pdaTwo, '$vehicleNumber', $jacket, $footwear, $pegs);";
+  ('$name', '$duty', $pdaOne, $pdaTwo, $vanID, '$jacket', '$footwear', '$pegs');";
 
         $data = ["status" => ""];
 

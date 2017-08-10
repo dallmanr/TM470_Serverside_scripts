@@ -2,23 +2,22 @@
   include "database.php";
 
   $staffMember = intval($_POST['staffMember']);
-  //$vanNumber = $_POST['vanNumber'];
-  $collDutiesComp = intval($_POST['collDutiesComp']);
-  $collPouch = intval($_POST['collPouch']);
-  $pdasReturned = intval($_POST['pdasReturned']);
-  $logbook = intval($_POST['logbook']);
-  $keysReturned = intval($_POST['keysReturned']);
+  $collDutiesComp = $_POST['collDutiesComp'];
+  $collPouch = $_POST['collPouch'];
+  $pdasReturned = $_POST['pdasReturned'];
+  $logbook = $_POST['logbook'];
+  $keysReturned = $_POST['keysReturned'];
 
   $curDate = date('y/m/d');
 
 
 $sql = "UPDATE dutyDetails
 SET
-    collectionDutiesCompleted = $collDutiesComp,
-    collectionPouchReturned = $collPouch,
-    pdasReturned = $pdasReturned,
-    logbookReturned = $logbook,
-    keysReturned = $keysReturned
+    collectionDutiesCompleted = '$collDutiesComp',
+    collectionPouchReturned = '$collPouch',
+    pdasReturned = '$pdasReturned',
+    logbookReturned = '$logbook',
+    keysReturned = '$keysReturned'
 WHERE
     staffMember = $staffMember AND DATE(timeOut) = CURDATE()
         AND timeIn IS NULL;";
