@@ -11,21 +11,17 @@
 $sql = "INSERT INTO vans (regNumber, vehicleNumber, serialNumber, numKeysAvailable, available, active)
 VALUES ('$regNumber', '$vehicleNumber', $serialNumber, $keysAvail, 1, 1)";
 
-$result1 = ["status" => "",
+$data = ["status" => "",
 "data" => ""];
-
-$result2 = ["status" => "",
-"data" => ""];
-
 
 if ($conn->query($sql) === TRUE) {
-  $result1["status"] = "success 1";
-  $result1["data"] = "Van added to system";
+  $data["status"] = "success";
+  $data["data"] = "Van added to system";
     //header("location: index.html");
 } else {
   $error = $conn->error;
-  $result1["status"] ="fail 1";
-  $result1["data"]= $error;
+  $data["status"] ="fail 1";
+  $data["data"]= $error;
     //echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
@@ -40,16 +36,15 @@ $sql3 = "INSERT INTO vanhistory
     ($vanID, 'added', '$reasonAdded', $addedBy);";
 
 if ($conn->query($sql3) === TRUE) {
-    $result2["status"] = "success 2";
-    $result2["data"] = "van added to van history";
+    $data["status"] = "success";
+    $data["data"] = "van added to van history";
   } else {
     $error = $conn->error;
-    $result2["status"] ="fail 2";
-    $result2["data"]= $error;
+    $data["status"] ="fail 2";
+    $data["data"]= $error;
   }
 
-  $myJSON = json_encode($result1);
-  $myJSON .= json_encode($result2);
+  $myJSON = json_encode($data);
   echo $myJSON;
 //$conn->close();
 ?>
