@@ -3,7 +3,7 @@
 $sql = "SELECT vehicleNumber
 FROM vans
 AS a
-WHERE NOT EXISTS (SELECT vanNumber FROM dutyDetails AS b WHERE a.vehicleNumber = b.vanNumber
+WHERE NOT EXISTS (SELECT vanID FROM dutyDetails AS b WHERE a.vanID = b.vanID
   AND DATE(timeIn) IS NULL)
   AND active = 1 AND available = 1
   ORDER BY vehicleNumber ASC";

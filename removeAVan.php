@@ -1,23 +1,27 @@
 <?php
   include "database.php";
 
-  $regNumber = $_POST['regNumber'];
+  $vanID = intval($_POST['vanID']);
   $reason = $_POST['reason'];
+  $removedBy = intval($_POST['removedBy']);
 
 
 $sql = "UPDATE vans
 SET
     active = 0,
-    available = 0,
-    reasonRemoved = '$reason',
-    dateRemoved = CURRENT_TIMESTAMP()
+    available = 0
 WHERE
-    regNumber = '$regNumber';";
+    vanID = $vanID;";
+
+$sql .= "INSERT INTO vanhistory
+    (van, status, comments, editedBy)
+  VALUES
+    ($vanID, 'removed', '$reason', $removedBy)";
 
     $data = ["status" => "",
     "data" => ""];
 
-    if ($conn->query($sql) === TRUE) {
+    if ($conn->multi_query($sql) === TRUE) {
       $data["status"] = "success";
       $data["data"] = "Van removed from system";
         //header("location: index.html");
