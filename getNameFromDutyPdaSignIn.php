@@ -4,13 +4,18 @@
   $dutyNumber = $_POST["dutyNumber"];
 
 $sql = "SELECT
-    firstName, lastName, payeNumber, duty, pdaOne
+    firstName,
+    lastName,
+    payeNumber ,
+    pda_id_fk
 FROM
-    dutyDetails
+    dutydetails
         INNER JOIN
-    staff ON dutyDetails.staffMember = staff.payeNumber
+    duty_pdas ON duty_pdas.dutydetails_id_fk = dutydetails.dutydetails_id
+        INNER JOIN
+    staff ON dutydetails.staffMember = staff.payeNumber
 WHERE
-    duty = '$dutyNumber' AND DATE(timeIn) IS NULL
+    duty = $dutyNumber AND DATE(timeIn) IS NULL
         AND DATE(timeOut) = CURDATE();";
 
         $result = $conn->query($sql);

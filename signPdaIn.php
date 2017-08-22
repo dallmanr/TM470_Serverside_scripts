@@ -2,12 +2,13 @@
   include "database.php";
 
   $staffMember = intval($_POST["staffMember"]);
-  $pdaReturned = intval($_POST["pdaReturned"]);
+  $pdaReturned = $_POST["pdaReturned"];
   $duty = $_POST["duty"];
+  $pdaNumber = intval($_POST["pdaNumber"]);
 
 $sql = "UPDATE dutyDetails
 SET
-    pdasReturned = $pdaReturned
+    pdasReturned = '$pdaReturned'
 WHERE
     staffMember = $staffMember AND duty = '$duty'
         AND DATE(timeOut) = CURDATE()
@@ -17,12 +18,19 @@ WHERE
 
         if ($conn->query($sql) === true) {
             $data["status"] = "success";
-            //header("location: index.html");
         } else {
             $error = $conn->error;
             $data["status"] = $error;
-            //echo "Error: " . $sql . "<br>" . $conn->error;
         }
-          $myJSON = json_encode($data);
-          echo $myJSON;
-//$conn->close();
+
+$sql2 = "UPDATE pda SET available = 1 WHERE pdaNumber = $pdaNumber;";
+
+if ($conn->query($sql2) === true) {
+    $data["status"] = "success";
+} else {
+    $error = $conn->error;
+    $data["status"] = $error;
+}
+  $myJSON = json_encode($data);
+  echo $myJSON;
+  //$conn->close();
