@@ -15,14 +15,13 @@ WHERE
     staffMember = $staffMember AND DATE(timeIn) IS NULL";
 
     $result = $conn->query($sql);
-    if($result -> num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-        //echo "<option value='" .$row['vanNumber']."'>" .$row['vanNumber']. "</option>";
-        $data[] = $row;
+    if ($result -> num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            //echo "<option value='" .$row['vanNumber']."'>" .$row['vanNumber']. "</option>";
+            $data[] = $row;
         }
-  } else {
-    //echo "<script language='javascript'>alert('Driver list is empty!');</script>";
-    $myJSON = json_encode($data);
-    echo $myJSON;
-  }
- ?>
+    } else {
+        //echo "<script language='javascript'>alert('Driver list is empty!');</script>";
+        $myJSON = json_encode($data);
+        echo $myJSON;
+    }

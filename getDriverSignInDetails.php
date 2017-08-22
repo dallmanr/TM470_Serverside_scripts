@@ -18,15 +18,14 @@ WHERE
 
 $result = $conn->query($sql);
 
-	if($result -> num_rows > 0) {
-  while ($row = $result-> fetch_assoc()) {
-    $data[] = $row;
+    if ($result -> num_rows > 0) {
+        while ($row = $result-> fetch_assoc()) {
+            $data[] = $row;
+        }
+    } else {
+        $error = $conn->error;
+        $data[] = $error;
+        //echo "<script language='javascript'>alert('$myJSON');</script>";
     }
-  } else {
-    $error = $conn->error;
-    $data[] = $error;
-    //echo "<script language='javascript'>alert('$myJSON');</script>";
-  }
   $myJSON = json_encode($data);
   echo $myJSON;
-?>

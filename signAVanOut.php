@@ -11,7 +11,7 @@
   $footwear = $_POST['footwear'];
   $jacket = $_POST['jacket'];
 
-  $pdas = array ($pdaOne, $pdaTwo);
+  $pdas = array($pdaOne, $pdaTwo);
 
   $curDate = date('y/m/d');
 
@@ -24,13 +24,13 @@ VALUES
 
         $data = ["status" => ""];
 
-        if ($conn->query($sql) === TRUE) {
-          $data["status"] = "success";
+        if ($conn->query($sql) === true) {
+            $data["status"] = "success";
             //header("location: index.html");
         } else {
-          $error = $conn->error;
-          $data["status"] = "SQL1 Error - " . $error;
-          //$conn->close();
+            $error = $conn->error;
+            $data["status"] = "SQL1 Error - " . $error;
+            //$conn->close();
             //echo "Error: " . $sql . "<br>" . $conn->error;
         }
 
@@ -39,13 +39,13 @@ VALUES
 
 $sql2 = "SELECT MAX(dutydetails_id) as dutydetails_id FROM dutydetails";
 
-if ($conn->query($sql2) === TRUE) {
-  $data["status"] = "success";
+if ($conn->query($sql2) === true) {
+    $data["status"] = "success";
     //header("location: index.html");
 } else {
-  $error = $conn->error;
-  $data["status"] = "SQL2 Error - " . $error;
-  //$conn->close();
+    $error = $conn->error;
+    $data["status"] = "SQL2 Error - " . $error;
+    //$conn->close();
 }
 $result = mysqli_query($conn, $sql2);
 $rs = mysqli_fetch_array($result);
@@ -55,27 +55,25 @@ $dutyid = $rs['dutydetails_id'];
 
 
 foreach ($pdas as $pda) {
-
-  $sql3 = "INSERT INTO duty_pdas (pda_id_fk, dutydetails_id_fk)
+    $sql3 = "INSERT INTO duty_pdas (pda_id_fk, dutydetails_id_fk)
             VALUES ($pda, $dutyid);";
-  $sql4 = "UPDATE pda SET available = 0 WHERE pdaNumber = $pda;";
-  if ($conn->query($sql3) === TRUE) {
-    $data["status"] = "success";
-      } else {
-          $error = $conn->error;
-          $data["status"] = "SQL3 Error -  " . $error;
-          //$conn->close();
-        }
+    $sql4 = "UPDATE pda SET available = 0 WHERE pdaNumber = $pda;";
+    if ($conn->query($sql3) === true) {
+        $data["status"] = "success";
+    } else {
+        $error = $conn->error;
+        $data["status"] = "SQL3 Error -  " . $error;
+        //$conn->close();
+    }
 
-if ($conn->query($sql4) === TRUE) {
-  $data["status"] = "success";
+    if ($conn->query($sql4) === true) {
+        $data["status"] = "success";
     } else {
         $error = $conn->error;
         $data["status"] = "SQL4 Error -  " . $error;
         //$conn->close();
-      }
+    }
 }
   $myJSON = json_encode($data);
   echo $myJSON;
   $conn->close();
-?>

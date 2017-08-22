@@ -17,15 +17,14 @@ FROM
           "data" => ""];
 
   $result = $conn->query($sql);
-  	if($result -> num_rows > 0) {
-      $data["status"] = "success";
-    while ($row = $result-> fetch_assoc()) {
-      $data["data"] = $row;
-      }
+    if ($result -> num_rows > 0) {
+        $data["status"] = "success";
+        while ($row = $result-> fetch_assoc()) {
+            $data["data"] = $row;
+        }
     } else {
-      $data["status"] = "fail";
-      $data["data"] = "";
+        $data["status"] = "fail";
+        $data["data"] = "";
     }
       $myJSON = json_encode($data);
       echo $myJSON;
- ?>

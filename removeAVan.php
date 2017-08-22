@@ -21,17 +21,16 @@ $sql .= "INSERT INTO vanhistory
     $data = ["status" => "",
     "data" => ""];
 
-    if ($conn->multi_query($sql) === TRUE) {
-      $data["status"] = "success";
-      $data["data"] = "Van removed from system";
+    if ($conn->multi_query($sql) === true) {
+        $data["status"] = "success";
+        $data["data"] = "Van removed from system";
         //header("location: index.html");
     } else {
-      $error = $conn->error;
-      $data["status"] ="fail";
-      $data["data"]= $error;
+        $error = $conn->error;
+        $data["status"] ="fail";
+        $data["data"]= $error;
         //echo "Error: " . $sql . "<br>" . $conn->error;
     }
       $myJSON = json_encode($data);
       echo $myJSON;
     //$conn->close();
-    ?>

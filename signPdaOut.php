@@ -19,15 +19,14 @@ VALUES
 
         $data = ["status" => ""];
 
-        if ($conn->query($sql) === TRUE) {
-          $data["status"] = "success";
+        if ($conn->query($sql) === true) {
+            $data["status"] = "success";
             //header("location: index.html");
         } else {
-          $error = $conn->error;
-          $data["status"] = $error;
+            $error = $conn->error;
+            $data["status"] = $error;
             //echo "Error: " . $sql . "<br>" . $conn->error;
         }
           $myJSON = json_encode($data);
           echo $myJSON;
 //$conn->close();
-?>
