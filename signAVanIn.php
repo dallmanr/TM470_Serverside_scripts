@@ -7,9 +7,15 @@
   $pdasReturned = $_POST['pdasReturned'];
   $logbook = $_POST['logbook'];
   $keysReturned = $_POST['keysReturned'];
+  $dutyid = intval($_POST['dutyid']);
+  $pdaOne = intval($_POST['pdaOne']);
+  $pdaTwo = intval($_POST['pdaTwo']);
+
+  $pdas = array($pdaOne, $pdaTwo);
 
   $curDate = date('y/m/d');
 
+  $data = ["status" => ""];
 
 $sql = "UPDATE dutyDetails
 SET
@@ -19,19 +25,26 @@ SET
     logbookReturned = '$logbook',
     keysReturned = '$keysReturned'
 WHERE
-    staffMember = $staffMember AND DATE(timeOut) = CURDATE()
-        AND timeIn IS NULL;";
+    dutydetails_id = $dutyid;";
 
-        $data = ["status" => ""];
-
-        if ($conn->query($sql) === true) {
-            $data["status"] = "success";
-            //header("location: index.html");
+    if ($conn->query($sql) === true) {
+      $data["status"] = "success";
         } else {
             $error = $conn->error;
             $data["status"] = $error;
-            //echo "Error: " . $sql . "<br>" . $conn->error;
+          }
+
+foreach ($pdas as $pda) {
+      $sql2 = "UPDATE pda SET available = 1 WHERE pdaNumber = $pda;";
+      if ($conn->query($sql2) === true) {
+          $data["status"] = "success";
+      } else {
+          $error = $conn->error;
+          $data["status"] = "SQL2 Error -  " . $error;
+          //$conn->close();
         }
-          $myJSON = json_encode($data);
-          echo $myJSON;
+    }
+
+$myJSON = json_encode($data);
+echo $myJSON;
 //$conn->close();

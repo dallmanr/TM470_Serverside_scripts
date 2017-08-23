@@ -11,9 +11,10 @@ WHERE
             dutyDetails AS b
         WHERE
             a.payeNumber = b.staffMember
-                AND DATE(timeIn) IS NULL)
+                AND DATE(timeIn) IS NULL
+              AND DATE(timeOut) = CURDATE())
         AND currentEmp = 1
-ORDER BY payeNumber ASC";
+        ORDER BY payeNumber ASC";
 
   $result = $conn->query($sql);
 

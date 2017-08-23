@@ -5,32 +5,39 @@
   $reason = $_POST['reason'];
   $removedBy = intval($_POST['removedBy']);
 
+  $data = ["status" => "",
+  "data" => ""];
 
-$sql = "UPDATE vans
-SET
+  $sql = "UPDATE vans
+  SET
     active = 0,
     available = 0
-WHERE
-    vanID = $vanID;";
+    WHERE
+      vanID = $vanID;";
 
-$sql .= "INSERT INTO vanhistory
+    if ($conn->multi_query($sql) === true) {
+        $data["status"] = "success";
+        $data["data"] = "SQL1 Successful";
+    } else {
+        $error = $conn->error;
+        $data["status"] ="fail";
+        $data["data"]= "SQL1 - " . $error;
+    }
+
+  $sql2 = "INSERT INTO vanhistory
     (van, status, comments, editedBy)
   VALUES
     ($vanID, 'removed', '$reason', $removedBy)";
 
-    $data = ["status" => "",
-    "data" => ""];
-
-    if ($conn->multi_query($sql) === true) {
+    if ($conn->multi_query($sql2) === true) {
         $data["status"] = "success";
         $data["data"] = "Van removed from system";
-        //header("location: index.html");
     } else {
         $error = $conn->error;
         $data["status"] ="fail";
-        $data["data"]= $error;
-        //echo "Error: " . $sql . "<br>" . $conn->error;
+        $data["data"]= "SQL 2 - " . $error;
     }
-      $myJSON = json_encode($data);
-      echo $myJSON;
+
+  $myJSON = json_encode($data);
+  echo $myJSON;
     //$conn->close();

@@ -4,13 +4,15 @@
   $staffMember = intval($_POST['staffMember']);
 
 $sql = "SELECT
-    vehicleNumber, pdaOne, pdaTwo, duty
+    vehicleNumber, duty, pda_id_fk, dutydetails_id
 FROM
     dutyDetails
         INNER JOIN
     vans ON dutydetails.vanID = vans.vanID
         INNER JOIN
     staff ON dutydetails.staffMember = staff.payeNumber
+        INNER JOIN
+    duty_pdas ON duty_pdas.dutydetails_id_fk = dutydetails.dutydetails_id
 WHERE
     staffMember = $staffMember
         AND DATE(timeOut) = CURDATE()
