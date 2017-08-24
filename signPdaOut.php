@@ -3,10 +3,10 @@
 
   $name = intval($_POST["name"]);
   $duty = $_POST["duty"];
-  $pdaOne = intval($_POST["pdaOne"]);
-  $pegs = intval($_POST["pegs"]);
-  $footwear = intval($_POST["footwear"]);
-  $jacket = intval($_POST["jacket"]);
+  $pdaOne = $_POST["pdaOne"];
+  $pegs = $_POST["pegs"];
+  $footwear = $_POST["footwear"];
+  $jacket = $_POST["jacket"];
 
   $curDate = date('y/m/d');
 
@@ -16,7 +16,7 @@ $sql = "INSERT INTO
 dutydetails
   (staffMember, duty, hiVis, footwear, postingPeg)
 VALUES
-  ($name, '$duty', $jacket, $footwear, $pegs);";
+  ($name, '$duty', '$jacket', '$footwear', '$pegs');";
 
         $data = ["status" => ""];
 
@@ -50,8 +50,8 @@ VALUES
 
         foreach ($pdas as $pda) {
             $sql3 = "INSERT INTO duty_pdas (pda_id_fk, dutydetails_id_fk)
-                    VALUES ($pda, $dutyid);";
-            $sql4 = "UPDATE pda SET available = 0 WHERE pdaNumber = $pda;";
+                    VALUES ('$pda', $dutyid);";
+            $sql4 = "UPDATE pda SET available = 0 WHERE pdaNumber = '$pda';";
 
             if ($conn->query($sql3) === true) {
                 $data["status"] = "success";

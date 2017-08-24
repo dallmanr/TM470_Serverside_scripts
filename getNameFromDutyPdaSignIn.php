@@ -6,8 +6,9 @@
 $sql = "SELECT
     firstName,
     lastName,
-    payeNumber ,
-    pda_id_fk
+    payeNumber,
+    pda_id_fk,
+    dutydetails_id
 FROM
     dutydetails
         INNER JOIN
@@ -15,13 +16,14 @@ FROM
         INNER JOIN
     staff ON dutydetails.staffMember = staff.payeNumber
 WHERE
-    duty = $dutyNumber AND DATE(timeIn) IS NULL
+    duty = '$dutyNumber' AND DATE(timeIn) IS NULL
         AND DATE(timeOut) = CURDATE();";
 
         $result = $conn->query($sql);
 
         $data = ["status" => "",
       "data" => ""];
+
         if ($result -> num_rows > 0) {
             $data["status"] = "success";
             while ($row = $result->fetch_assoc()) {
