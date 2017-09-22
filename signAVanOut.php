@@ -36,7 +36,6 @@ VALUES
 
 //Second statement - Select the last row in the dutydetails table to get the dutydetails id value
 //Assign this to a variable for use in statement 3
-
 $sql2 = "SELECT MAX(dutydetails_id) as dutydetails_id FROM dutydetails";
 
 if ($conn->query($sql2) === true) {
@@ -52,8 +51,6 @@ $rs = mysqli_fetch_array($result);
 $dutyid = $rs['dutydetails_id'];
 
 //Third statement - Insert into the duty_pdas table to record which PDAs a driver has signed for
-
-
 foreach ($pdas as $pda) {
     $sql3 = "INSERT INTO duty_pdas (pda_id_fk, dutydetails_id_fk)
             VALUES ($pda, $dutyid);";

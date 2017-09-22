@@ -25,3 +25,4 @@ WHERE
           $myJSON = json_encode($data);
           echo $myJSON;
       }
+?>

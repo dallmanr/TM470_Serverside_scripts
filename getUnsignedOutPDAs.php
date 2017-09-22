@@ -14,3 +14,4 @@ if ($result -> num_rows > 0) {
     $myJSON = json_encode($data);
     echo $myJSON;
 }
+?>
